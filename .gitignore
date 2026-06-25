@@ -1,0 +1,54 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# Environment Variables
+.env
+.env.local
+
+# Streamlit
+.streamlit/secrets.toml
+
+# IDE
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Build Files
+build/
+dist/
+
+# Testing
+.pytest_cache/
+.coverage
+
+# Jupyter
+.ipynb_checkpoints/
+
+# FastAPI
+*.db
+*.sqlite3
+
+# Node.js (if frontend uses React/Next.js)
+node_modules/
+.next/
+out/
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
