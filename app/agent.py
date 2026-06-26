@@ -1,11 +1,9 @@
 from groq import Groq
-from dotenv import load_dotenv
-import os
+from app.config import get_groq_api_key
 
-load_dotenv()
-
+# Create client safely
 client = Groq(
-    api_key=os.getenv("GROQ_API_KEY")
+    api_key=get_groq_api_key()
 )
 
 
