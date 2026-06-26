@@ -31,7 +31,7 @@ platform = st.selectbox(
         "Instagram",
         "LinkedIn",
         "Google",
-        "Email",
+        "Email"
     ]
 )
 
