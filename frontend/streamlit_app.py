@@ -1,7 +1,9 @@
+from pathlib import Path
 import sys
-import os
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
 
 import streamlit as st
 from app.agent import generate_marketing_content
