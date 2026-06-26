@@ -6,19 +6,46 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import streamlit as st
 from app.agent import generate_marketing_content
 
-st.title("Marketing Agent")
+st.title("AI Marketing Agent")
 
 business_name = st.text_input("Business Name")
 audience = st.text_input("Audience")
 goal = st.text_input("Goal")
 
-platform = st.selectbox("Platform", ["Facebook", "Instagram", "LinkedIn"])
+tool = st.selectbox(
+    "Select Tool",
+    [
+        "Facebook Ad",
+        "Instagram Post",
+        "Google Ad",
+        "Email Marketing",
+        "SEO Keywords",
+        "Marketing Strategy"
+    ]
+)
+
+platform = st.selectbox(
+    "Platform",
+    [
+        "Facebook",
+        "Instagram",
+        "LinkedIn"
+    ]
+)
 
 if st.button("Generate"):
-    result = generate_marketing_content(
-        business_name,
-        audience,
-        goal,
-        platform
-    )
-    st.write(result)
+
+    if business_name and audience and goal:
+
+        result = generate_marketing_content(
+            business_name,
+            audience,
+            goal,
+            platform,
+            tool
+        )
+
+        st.write(result)
+
+    else:
+        st.warning("Please fill all fields.")

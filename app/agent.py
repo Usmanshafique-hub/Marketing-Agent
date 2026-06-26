@@ -1,19 +1,109 @@
-def generate_marketing_prompt(
-    business_name: str,
-    audience: str,
-    goal: str,
-    platform: str
+from groq import Groq
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+client = Groq(
+    api_key=os.getenv("GROQ_API_KEY")
+)
+
+
+def generate_marketing_content(
+    business_name,
+    audience,
+    goal,
+    platform,
+    tool
 ):
-    prompt = f"""
+
+    if tool == "Facebook Ad":
+        prompt = f"""
+Create 3 high-converting Facebook Ads.
+
+Business Name: {business_name}
+Audience: {audience}
+Goal: {goal}
+
+Include:
+- Primary Text
+- Headline
+- Description
+- CTA
+"""
+
+    elif tool == "Instagram Post":
+        prompt = f"""
+Create an Instagram marketing post.
+
+Business Name: {business_name}
+Audience: {audience}
+Goal: {goal}
+
+Include:
+- Caption
+- CTA
+- 15 Hashtags
+"""
+
+    elif tool == "Google Ad":
+        prompt = f"""
+Create Google Search Ads.
+
+Business Name: {business_name}
+Audience: {audience}
+Goal: {goal}
+
+Include:
+- 5 Headlines
+- 5 Descriptions
+"""
+
+    elif tool == "Email Marketing":
+        prompt = f"""
+Create a marketing email.
+
+Business Name: {business_name}
+Audience: {audience}
+Goal: {goal}
+"""
+
+    elif tool == "SEO Keywords":
+        prompt = f"""
+Generate SEO keywords.
+
+Business Name: {business_name}
+Audience: {audience}
+Goal: {goal}
+"""
+
+    else:
+        prompt = f"""
 You are a senior digital marketing strategist.
 
 Business Name: {business_name}
-Target Audience: {audience}
+Audience: {audience}
 Goal: {goal}
+Platform: {platform}
 
-Platform:
-{platform}
+Generate:
 
-Generate a professional marketing report.
+1. Marketing Strategy
+2. Audience Analysis
+3. CTA
+4. Social Media Caption
+5. 15 Hashtags
+6. Competitor Suggestions
 """
-    return prompt
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
+    )
+
+    return response.choices[0].message.content
